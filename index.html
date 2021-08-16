@@ -1,0 +1,54 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+    <title>Document</title>
+</head>
+<body style="background-color: black;">
+    <img src="https://images.unsplash.com/photo-1627133935524-6b60fa3f5fdf?ixid=MnwyNTQxMjN8MHwxfHJhbmRvbXx8fHx8fHx8fDE2MjkxMzgxMTE&ixlib=rb-1.2.1" height="100%" style="margin-left: auto;margin-right: auto; display: block; width: fit-content;" alt="">
+</body>
+<script>
+    var arr=[];
+    var i=-1;
+    document.addEventListener('keydown',(event)=>{
+        var el=document.querySelector('img');
+        if(event.keyCode==39){
+            if(i==arr.length-1){
+                $.ajax({
+                    type:"GET",
+                    url:"https://api.unsplash.com/photos/random?client_id=dDDMH5my1YxeiXMDQ2iUhQQSQlbRoLgN-KJWzUpnrX4&query=nature&count=30&orientation=landscape",
+                    async:false,
+                    success:(result,status)=>{
+                        result.forEach(element => {
+                            arr.push(element.urls.full);
+                        });
+                        console.log(arr);
+                    }
+                });
+            }
+            el.src=arr[++i];
+            el.alt=arr[i];
+        }else{
+            if(i<=0){
+                i=0;
+                $.ajax({
+                    type:"GET",
+                    url:"https://api.unsplash.com/photos/random?client_id=dDDMH5my1YxeiXMDQ2iUhQQSQlbRoLgN-KJWzUpnrX4&query=nature&count=30&orientation=landscape",
+                    async:false,
+                    success:(result,status)=>{
+                        result.forEach(element => {
+                            arr.unshift(element.urls.full);
+                        });
+                        i+=result.length;
+                        console.log(arr);
+                    }
+                });
+            }
+            el.src=arr[--i];   
+            el.alt=i;
+        }
+    })
+</script>
+</html>
