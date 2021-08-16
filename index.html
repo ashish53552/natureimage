@@ -3,52 +3,42 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
     <title>Document</title>
 </head>
-<body style="background-color: black;">
-    <img src="https://images.unsplash.com/photo-1627133935524-6b60fa3f5fdf?ixid=MnwyNTQxMjN8MHwxfHJhbmRvbXx8fHx8fHx8fDE2MjkxMzgxMTE&ixlib=rb-1.2.1" height="100%" style="margin-left: auto;margin-right: auto; display: block; width: fit-content;" alt="">
+<body style="background-color: black;"> 
+    <div id="cont" class="carousel slide" data-ride="carousel">
+        <div id ="image" class="carousel-inner">
+            <div class="carousel-item active"><img src="https://images.unsplash.com/photo-1611307742746-43cbea512c37?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80" height="100%" style="margin-left: auto;margin-right: auto; display: block; width: fit-content;" class="d-block" alt="..."></div>
+        <a class="carousel-control-prev" href="#cont" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#cont" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+      
 </body>
 <script>
-    var arr=[];
-    var i=-1;
-    document.addEventListener('keydown',(event)=>{
-        var el=document.querySelector('img');
-        if(event.keyCode==39){
-            if(i==arr.length-1){
-                $.ajax({
-                    type:"GET",
-                    url:"https://api.unsplash.com/photos/random?client_id=dDDMH5my1YxeiXMDQ2iUhQQSQlbRoLgN-KJWzUpnrX4&query=nature&count=30&orientation=landscape",
-                    async:false,
-                    success:(result,status)=>{
-                        result.forEach(element => {
-                            arr.push(element.urls.full);
-                        });
-                        console.log(arr);
-                    }
-                });
-            }
-            el.src=arr[++i];
-            el.alt=arr[i];
-        }else{
-            if(i<=0){
-                i=0;
-                $.ajax({
-                    type:"GET",
-                    url:"https://api.unsplash.com/photos/random?client_id=dDDMH5my1YxeiXMDQ2iUhQQSQlbRoLgN-KJWzUpnrX4&query=nature&count=30&orientation=landscape",
-                    async:false,
-                    success:(result,status)=>{
-                        result.forEach(element => {
-                            arr.unshift(element.urls.full);
-                        });
-                        i+=result.length;
-                        console.log(arr);
-                    }
-                });
-            }
-            el.src=arr[--i];   
-            el.alt=i;
-        }
-    })
+    var el=document.querySelector('#image');
+    $(document).ready(()=>{
+        $.ajax({
+                type:"GET",
+                url:"https://api.unsplash.com/photos/random?client_id=dDDMH5my1YxeiXMDQ2iUhQQSQlbRoLgN-KJWzUpnrX4&query=nature&count=30&orientation=landscape",
+                async:true,
+                success:(result,status)=>{
+                    result.forEach(element => {
+                        console.log(el);
+                        el.insertAdjacentHTML('afterbegin',  "<div class=\"carousel-item\"><img rel=\"prefetch\" src=\""+element.urls.regular+"\"height=\"100%\" style=\"margin-left: auto;margin-right: auto; display: block;\" class=\"d-block\" alt=\"...\"></div>");
+                    });
+                }
+            });
+    });
 </script>
-</html>
+</html> 
