@@ -31,7 +31,7 @@
                 success:(result,status)=>{
                     result.forEach(element => {
                         console.log(el);
-                        el.insertAdjacentHTML('afterbegin',  "<div class=\"carousel-item\"><img rel=\"prefetch\" src=\""+element.urls.full+"\"height=\"100%\" style=\"margin-left: auto;margin-right: auto; display: block;\" class=\"d-block\" alt=\"...\"></div>");
+                        el.insertAdjacentHTML('afterbegin',  "<div class=\"carousel-item\"><img rel=\"prefetch\" src=\""+element.urls.regular+"\"height=\"100%\" style=\"margin-left: auto;margin-right: auto; display: block;\" class=\"d-block\" alt=\"...\"></div>");
                     });
                 }
             });
