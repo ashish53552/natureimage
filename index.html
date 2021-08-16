@@ -25,7 +25,7 @@
     var el=document.querySelector('#image');
     var quality;
     $(document).ready(()=>{
-        var person = prompt("Select image quality according to your internet speemd\n(〃＾▽＾〃) \nEnter:\n 1 for OP quality\n2 for low\n3 for high quality");
+        var person = prompt("Select image quality according to your internet speemd\n(〃＾▽＾〃) \nEnter:\n1 for OP quality\n2 for low\n3 for high quality");
         $.ajax({
                 type:"GET",
                 url:"https://api.unsplash.com/photos/random?client_id=dDDMH5my1YxeiXMDQ2iUhQQSQlbRoLgN-KJWzUpnrX4&query=nature&count=30&orientation=landscape",
